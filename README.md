@@ -1,4 +1,4 @@
-KEYSAT-API-EXPERIMENTAL is a Spring Boot application with Spring Security for secure web interactions. It includes user authentication and protected endpoints.
+KEYSAT2024-API is a Spring Boot application with Spring Security for secure web interactions. It includes user authentication and protected endpoints.
 Configuration. This is an experimental build for researching and developing basic funcionality for the eventual KEYSAT2024 project.
 Security Configuration (Auth.java)
 

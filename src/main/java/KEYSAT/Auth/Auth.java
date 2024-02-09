@@ -68,7 +68,7 @@ public UserDetailsService userDetailsService() {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
             .dataSource(dataSource)
-            .usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username=?")
+            .usersByUsernameQuery("SELECT username, password FROM users WHERE username=?")
             .authoritiesByUsernameQuery("SELECT username, authority FROM user_roles WHERE username=?");
     }
 }

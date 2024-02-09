@@ -1,4 +1,4 @@
-package KEYSAT;
+package keysat;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

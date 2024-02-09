@@ -1,4 +1,4 @@
-package KEYSAT.AttendanceService;
+package keysat.AttendanceService;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

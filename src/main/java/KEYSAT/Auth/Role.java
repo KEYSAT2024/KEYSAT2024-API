@@ -1,4 +1,4 @@
-package KEYSAT.Auth;
+package keysat.Auth;
 
 import jakarta.persistence.*;
 

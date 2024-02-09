@@ -1,4 +1,4 @@
-package KEYSAT.AttendanceService;
+package keysat.AttendanceService;
 
 import java.sql.Date;
 import jakarta.persistence.Entity;

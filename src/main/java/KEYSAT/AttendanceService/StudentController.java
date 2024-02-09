@@ -1,4 +1,4 @@
-package KEYSAT.AttendanceService;
+package keysat.AttendanceService;
 
 import java.util.List;
 

@@ -1,11 +1,11 @@
-package KEYSAT.Prototype.KEYSATALPHA;
-
-import KEYSAT.Auth.User;
-import KEYSAT.Auth.UserRepository;
+package keysat.prototype.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import keysat.Auth.User;
+import keysat.Auth.UserRepository;
 
 import java.util.Optional;
 @SpringBootTest

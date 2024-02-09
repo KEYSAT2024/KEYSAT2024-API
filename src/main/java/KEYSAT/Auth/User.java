@@ -1,4 +1,4 @@
-package KEYSAT.Auth;
+package keysat.Auth;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.GrantedAuthority;

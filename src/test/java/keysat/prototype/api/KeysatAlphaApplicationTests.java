@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import keysat.Auth.User;
-import keysat.Auth.UserRepository;
+import keysat.entities.User;
+import keysat.repository.UserRepository;
 
 import java.util.Optional;
 @SpringBootTest

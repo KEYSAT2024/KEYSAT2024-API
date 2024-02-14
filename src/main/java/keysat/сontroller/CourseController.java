@@ -1,5 +1,7 @@
-package keysat.AttendanceService;
+package keysat.сontroller;
 
+import keysat.repository.CourseRepository;
+import keysat.entities.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

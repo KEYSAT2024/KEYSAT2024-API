@@ -1,7 +1,9 @@
-package keysat.AttendanceService;
+package keysat.сontroller;
 
 import java.util.List;
 
+import keysat.repository.StudentRepository;
+import keysat.entities.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

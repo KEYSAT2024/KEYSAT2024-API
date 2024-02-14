@@ -1,5 +1,9 @@
-package keysat.Auth;
+package keysat.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +14,10 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class User implements UserDetails {
 
     @Id
@@ -30,31 +38,6 @@ public class User implements UserDetails {
     )
     private Collection<Role> roles;
 
-    // Getter method for id
-    public Long getId() {
-        return user_id;
-    }
-
-    // Setter method for id
-    public void setId(Long id) {
-        this.user_id = id;
-    }
-
-    // Setter method for username
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    // Setter method for roles
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
-    }
-    
-    // Getter method for roles
-    public Collection<Role> getRoles() {
-        return roles;
-    }
-    
     // Override methods from UserDetails
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -41,14 +41,14 @@ public class Auth {
 	
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
+				.httpBasic() // Enable Basic Authentication
+				.and()
 				.authorizeHttpRequests((requests) -> requests
 						.requestMatchers("/", "/home").permitAll()
 						.requestMatchers("/secret").hasRole("USER")
+						.requestMatchers("/teachersecret").hasRole("TEACHER")
 						.anyRequest().authenticated())
-				.formLogin((form) -> form
-						.loginPage("/login")
-						.permitAll())
-				.logout((logout) -> logout.permitAll());
+				.csrf().disable(); // It's common to disable CSRF for APIs, but consider your security requirements
 
 		return http.build();
 	}
@@ -63,7 +63,7 @@ public UserDetailsService userDetailsService() {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
             .dataSource(dataSource)
-            .usersByUsernameQuery("SELECT username, password FROM users WHERE username=?")
+            .usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username=?")
             .authoritiesByUsernameQuery("SELECT username, authority FROM user_roles WHERE username=?");
     }
 }

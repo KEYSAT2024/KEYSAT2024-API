@@ -26,4 +26,9 @@ public class API {
         return "secret";
     }
 
+    @GetMapping("/teachersecret")
+    public String teachersecret() {
+        return "teachersecret";
+    }
+
     }

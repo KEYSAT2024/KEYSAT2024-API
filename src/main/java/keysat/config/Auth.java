@@ -2,6 +2,7 @@ package keysat.config;
 
 import keysat.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.context.annotation.Bean;
@@ -18,27 +19,21 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 
-
-
 public class Auth {
-
 
 	@Autowired
 	private UserRepository userRepository;
 
-
 	@Autowired
 	private DataSource dataSource;
 
-	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		// This bean indicates that passwords are not encoded
-		return NoOpPasswordEncoder.getInstance();
-	}
+    return new BCryptPasswordEncoder(); 
+}
 
 	@Bean
-	
+
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 				.httpBasic() // Enable Basic Authentication
@@ -47,23 +42,24 @@ public class Auth {
 						.requestMatchers("/", "/home").permitAll()
 						.requestMatchers("/secret").hasRole("USER")
 						.requestMatchers("/teachersecret").hasRole("TEACHER")
-						.anyRequest().authenticated())
+						.requestMatchers("/users/create").permitAll()
+						.requestMatchers("/users").permitAll())
 				.csrf().disable(); // It's common to disable CSRF for APIs, but consider your security requirements
 
 		return http.build();
 	}
 
-@Bean
-public UserDetailsService userDetailsService() {
-	JdbcUserDetailsManager manager = new JdbcUserDetailsManager(dataSource);
-	return manager;
-}
+	@Bean
+	public UserDetailsService userDetailsService() {
+		JdbcUserDetailsManager manager = new JdbcUserDetailsManager(dataSource);
+		return manager;
+	}
 
-  @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()
-            .dataSource(dataSource)
-            .usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username=?")
-            .authoritiesByUsernameQuery("SELECT username, authority FROM user_roles WHERE username=?");
-    }
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth.jdbcAuthentication()
+				.dataSource(dataSource)
+				.usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username=?")
+				.authoritiesByUsernameQuery("SELECT username, authority FROM user_roles WHERE username=?");
+	}
 }

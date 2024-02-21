@@ -11,12 +11,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpServletRequest;
-import keysat.entities.LoginDTO;
+import keysat.dto.LoginDTO;
 
 @RestController
+@RequestMapping("/auth")
 public class AuthenticationController {
 
     @Autowired
@@ -38,5 +40,12 @@ public class AuthenticationController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed.");
         }
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request) {
+        SecurityContextHolder.clearContext();
+        request.getSession().invalidate();
+        return ResponseEntity.ok("Logged out successfully");
     }
 }

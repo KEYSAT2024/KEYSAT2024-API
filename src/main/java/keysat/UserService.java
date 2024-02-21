@@ -33,4 +33,13 @@ public class UserService {
         // Handle the case where the user doesn't exist
         return null;
     }
+
+    public void deleteUser(String username) {
+        User user = userRepository.findByUsername(username);
+        if (user != null) {
+            userRepository.delete(user);
+        } else {
+
+        }
+    }
 }

@@ -23,7 +23,6 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
-
 public class Auth {
 
 	@Autowired
@@ -38,38 +37,37 @@ public class Auth {
 }
 
 	@Bean
+	public UserDetailsService userDetailsService() {
+		return new JdbcUserDetailsManager(dataSource);
+	}
 
+	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
-		            .cors(cors -> cors.configurationSource(request -> {
+				.cors(cors -> cors.configurationSource(request -> {
                 CorsConfiguration config = new CorsConfiguration();
 				config.setAllowedOriginPatterns(List.of("*"));
                 config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                 config.setAllowedHeaders(List.of("*"));
-                config.setAllowCredentials(true); 
+                config.setAllowCredentials(true);
                 return config;
             }))
-				.httpBasic() 
+				.httpBasic()
 				.and()
 				.authorizeHttpRequests((requests) -> requests
 						.requestMatchers("/", "/home", "/login").permitAll()
 						.requestMatchers("/secret").hasRole("USER")
-						.requestMatchers("/teachersecret").hasRole("TEACHER")
+						.requestMatchers("/instructorsecret").hasRole("INSTRUCTOR")
 						.requestMatchers("/users/create").permitAll()
 						.requestMatchers("/users").permitAll())
-				.csrf().disable(); 
+				.csrf().disable();
 
 		return http.build();
 	}
 	@Bean
-		public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-			return authenticationConfiguration.getAuthenticationManager();
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+		return authenticationConfiguration.getAuthenticationManager();
     }
-	@Bean
-	public UserDetailsService userDetailsService() {
-		JdbcUserDetailsManager manager = new JdbcUserDetailsManager(dataSource);
-		return manager;
-	}
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

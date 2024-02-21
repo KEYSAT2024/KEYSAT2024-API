@@ -6,7 +6,6 @@ import keysat.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 
 import keysat.UserService;
@@ -68,10 +67,10 @@ public class UserController {
         return userService.changeUserPassword(username, newPassword);
     }
 
-    @DeleteMapping("/{username}")
+    @DeleteMapping("/{userId}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> deleteUser(@PathVariable String username) {
-        userService.deleteUser(username);
+    public ResponseEntity<?> deleteUser(@PathVariable Long userId) {
+        userService.deleteUser(userId);
         return ResponseEntity.ok().build();
     }
 }

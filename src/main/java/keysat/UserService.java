@@ -1,6 +1,7 @@
 package keysat;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -34,12 +35,12 @@ public class UserService {
         return null;
     }
 
-    public void deleteUser(String username) {
-        User user = userRepository.findByUsername(username);
-        if (user != null) {
-            userRepository.delete(user);
+    public ResponseEntity<?> deleteUser(Long userId) {
+        if (userRepository.existsById(userId)) {
+            userRepository.deleteById(userId);
+            return ResponseEntity.ok().build();
         } else {
-
+            return ResponseEntity.notFound().build();
         }
     }
 }

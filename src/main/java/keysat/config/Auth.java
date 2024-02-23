@@ -55,11 +55,15 @@ public class Auth {
 				.httpBasic()
 				.and()
 				.authorizeHttpRequests((requests) -> requests
+				  		
 						.requestMatchers("/", "/home", "/login").permitAll()
 						.requestMatchers("/secret").hasRole("USER")
 						.requestMatchers("/instructorsecret").hasRole("INSTRUCTOR")
 						.requestMatchers("/users/create").permitAll()
+						.requestMatchers("/users/{userId}").permitAll()
+						.requestMatchers("/users/change-password").permitAll()
 						.requestMatchers("/users").permitAll())
+			
 				.csrf().disable();
 
 		return http.build();

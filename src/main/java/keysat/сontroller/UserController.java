@@ -33,8 +33,9 @@ public class UserController {
         return userRepository.findAll();
     }
 
+
     @GetMapping("/{userId}")
-    @PreAuthorize("hasRole('ADMIN')")
+    // @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<User> getUserById(@PathVariable Long userId) {
         return userRepository.findById(userId).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }

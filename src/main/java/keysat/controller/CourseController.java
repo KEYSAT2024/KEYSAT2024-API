@@ -1,4 +1,4 @@
-package keysat.сontroller;
+package keysat.controller;
 
 import keysat.repository.CourseRepository;
 import keysat.entities.Course;

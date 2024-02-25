@@ -48,7 +48,6 @@ public class User implements UserDetails {
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName()))
                 .collect(Collectors.toList());
     }
-    
 
     @Override
     public String getPassword() {

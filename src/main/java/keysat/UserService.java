@@ -67,4 +67,8 @@ public class UserService {
             return ResponseEntity.notFound().build();
         }
     }
+
+    public void deleteAllUsers() {
+        userRepository.deleteAll();
+    }
 }

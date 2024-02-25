@@ -6,14 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class Student {
-    @Id
-    private Long id;
-    private String name;
-
-}
+@Entity(name = "student")
+@Table(name = "student")
+public class Student extends User {}

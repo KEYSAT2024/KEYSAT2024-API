@@ -5,9 +5,11 @@ Security Configuration (Auth.java)
     Endpoints:
         Public: "/", "/home", "/login"
         Secured: "/secret" *USER ROLE*
+        
     Authentication:
         Type: Form-based
         Page: "/login"
+        
     User Details:
         Stored In-memory
         Default User: "user", Password: "password"
@@ -42,16 +44,31 @@ Debugging
 
 Endpoints for Attendance Service:
 
-    GET `/courses:` Lists all courses.
-    GET `/courses/{id}`: Retrieves a specific course by ID.
-    POST `/courses: `Creates a new course.
-    PUT `/courses/{id`}: Updates an existing course by ID.
-    DELETE `/courses/{id}`: Deletes a course by ID.    GET `/students`: Lists all students.
-    GET `/students/{id}`: Retrieves a specific student by ID.
-    POST `/students`: Creates a new student.
-    PUT `/students/{id}`: Updates an existing student by ID.
-    DELETE `/students/{id}`: Deletes a student by ID.    GET `/attendanceRecords:` Lists all attendance records.
-    GET `/attendanceRecords/{id}:` Retrieves a specific attendance record by ID.
-    POST `/attendanceRecords:` Creates a new attendance record.
-    PUT `/attendanceRecords/{id}:` Updates an existing attendance record by ID.
-    DELETE `/attendanceRecords/{id}:` Deletes an attendance record by ID.
+    Courses:
+        GET `/courses:` Lists all courses.
+        GET `/courses/{id}`: Retrieves a specific course by ID.
+        POST `/courses: `Creates a new course.
+        PUT `/courses/{id}`: Updates an existing course by ID.
+        DELETE `/courses/{id}`: Deletes a course by ID.
+        
+    Students:
+        GET `/students`: Lists all students.
+        GET `/students/{id}`: Retrieves a specific student by ID.
+        POST `/students`: Creates a new student.
+        PUT `/students/{id}`: Updates an existing student by ID.
+        DELETE `/students/{id}`: Deletes a student by ID.    
+
+    Instructors:
+        GET `/instructors`: Lists all instructors.
+        GET `/instructors/{id}`: Retrieves a specific instructor by ID.
+        GET `/instructors/{id}/courses`: Lists all courses for the specific instructor.
+        POST `/instructors`: Creates a new instructor.
+        PUT `/instructors/{id}`: Updates an existing instructor by ID.
+        DELETE `/instructors/{id}`: Deletes an instructor by ID.    
+
+    Attendance:
+        GET `/attendanceRecords:` Lists all attendance records.
+        GET `/attendanceRecords/{id}:` Retrieves a specific attendance record by ID.
+        POST `/attendanceRecords:` Creates a new attendance record.
+        PUT `/attendanceRecords/{id}:` Updates an existing attendance record by ID.
+        DELETE `/attendanceRecords/{id}:` Deletes an attendance record by ID.

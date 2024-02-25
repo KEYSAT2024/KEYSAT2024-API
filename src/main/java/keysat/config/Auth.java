@@ -78,6 +78,9 @@ public class Auth {
 		auth.jdbcAuthentication()
 				.dataSource(dataSource)
 				.usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username=?")
-				.authoritiesByUsernameQuery("SELECT username, authority FROM user_roles WHERE username=?");
+				.authoritiesByUsernameQuery(
+						"SELECT u.username, r.authority FROM users u " +
+								"JOIN user_roles ur ON u.user_id = ur.user_id " +
+								"JOIN role r ON ur.role_id = r.role_id WHERE u.username=?");
 	}
 }

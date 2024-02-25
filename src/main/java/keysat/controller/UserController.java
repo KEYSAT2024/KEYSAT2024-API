@@ -1,4 +1,4 @@
-package keysat.сontroller;
+package keysat.controller;
 
 import keysat.entities.Role;
 import keysat.repository.RoleRepository;
@@ -11,7 +11,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import keysat.UserService;
 import keysat.entities.User;

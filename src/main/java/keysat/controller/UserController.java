@@ -6,6 +6,7 @@ import keysat.repository.UserRepository;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 
 import keysat.UserService;
+import keysat.dto.PasswordChangeDTO;
 import keysat.entities.User;
 
 import java.util.Collections;
@@ -35,7 +37,7 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -66,7 +68,7 @@ public class UserController {
     }
 
     @PutMapping("/{userId}")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody User updatedUser) {
         User existingUser = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -75,10 +77,15 @@ public class UserController {
         return ResponseEntity.ok(userRepository.save(existingUser));
     }
 
-    @PostMapping("/change-password")
-    public User changePassword(@RequestParam String username, @RequestParam String newPassword) {
-        return userService.changeUserPassword(username, newPassword);
+@PostMapping("/change-password")
+public ResponseEntity<?> changePassword(@RequestBody PasswordChangeDTO passwordChangeDTO) {
+    try {
+        userService.changeUserPassword(passwordChangeDTO.getUsername(), passwordChangeDTO.getNewPassword());
+        return ResponseEntity.ok().body("Password changed successfully.");
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Password change failed.");
     }
+}
 
     @DeleteMapping("/{userId}")
     @PreAuthorize("hasRole('ADMIN')")

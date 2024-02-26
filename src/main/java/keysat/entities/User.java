@@ -13,8 +13,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.stream.Collectors;
 
-@Entity
+@Entity(name = "user")
 @Table(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
 @AllArgsConstructor

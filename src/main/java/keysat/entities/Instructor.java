@@ -1,8 +1,15 @@
 package keysat.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.Collection;
+import java.util.HashSet;
 
 @Entity(name = "instructor")
 @Table(name = "instructor")
+@PrimaryKeyJoinColumn(
+        name = "instructor_id",
+        referencedColumnName = "user_id",
+        foreignKey = @ForeignKey(name = "instructor_user_id_fkey")
+)
 public class Instructor extends User {}

@@ -1,4 +1,6 @@
-package keysat;
+package keysat.service;
+
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,5 +68,10 @@ public class UserService {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    public List<User> getAllUsers() {
+        log.info("Retrieving all users");
+        return userRepository.findAll();
     }
 }

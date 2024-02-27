@@ -1,8 +1,8 @@
 package keysat.controller;
 
 import keysat.entities.User;
-import keysat.UserService;
 import keysat.repository.UserRepository;
+import keysat.service.UserService;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

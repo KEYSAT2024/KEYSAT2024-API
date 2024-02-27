@@ -3,6 +3,7 @@ package keysat.controller;
 import keysat.entities.Role;
 import keysat.repository.RoleRepository;
 import keysat.repository.UserRepository;
+import keysat.service.UserService;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import org.slf4j.Logger;
 
-import keysat.UserService;
 import keysat.dto.PasswordChangeDTO;
 import keysat.entities.User;
 
@@ -36,12 +36,10 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping
-    //@PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/users")
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        return userService.getAllUsers();
     }
-
 
     @GetMapping("/{userId}")
     // @PreAuthorize("hasRole('ADMIN')")

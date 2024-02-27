@@ -37,48 +37,31 @@ public class User implements UserDetails {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-        name = "user_roles",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id")
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Collection<Role> roles = new HashSet<>();
-    
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles.stream()
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName()))
                 .collect(Collectors.toList());
     }
-    
-
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.username;
-    }
 
     @Override
     public boolean isAccountNonExpired() {
-        return true; 
+        return false;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true; 
+        return false;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true; 
+        return false;
     }
-
-    @Override
-    public boolean isEnabled() {
-        return true; 
-    }
-
 }

@@ -1,6 +1,8 @@
 package keysat.config;
 
 import keysat.repository.UserRepository;
+import keysat.service.CustomUserDetailsService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
@@ -36,10 +38,10 @@ public class Auth {
     return new BCryptPasswordEncoder(); 
 }
 
-	@Bean
-	public UserDetailsService userDetailsService() {
-		return new JdbcUserDetailsManager(dataSource);
-	}
+@Bean
+public UserDetailsService userDetailsService() {
+    return new CustomUserDetailsService();
+}
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -56,7 +58,7 @@ public class Auth {
 				.and()
 				.authorizeHttpRequests((requests) -> requests
 				  		
-						.requestMatchers("/", "/home", "/login").permitAll()
+						.requestMatchers("/", "/home", "/login", "/auth/login").permitAll()
 						.requestMatchers("/secret").hasRole("USER")
 						.requestMatchers("/instructorsecret").hasRole("INSTRUCTOR")
 						.requestMatchers("/users/create").permitAll()

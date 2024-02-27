@@ -69,9 +69,8 @@ public class UserService {
             return ResponseEntity.notFound().build();
         }
     }
-
     public List<User> getAllUsers() {
         log.info("Retrieving all users");
         return userRepository.findAll();
-    }
+}
 }

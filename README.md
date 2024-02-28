@@ -1,4 +1,4 @@
-The Keysat Alpha Application API is a educational platform that manages attendance records, courses, instructors, and students. It provides a REST API to interact with the system, handling user authentication, role-based access control, and CRUD operations for various entities.
+The Keysat2024 API is a educational platform that manages attendance records, courses, instructors, and students. It provides a REST API to interact with the system, handling user authentication, role-based access control, and CRUD operations for various entities.
 
 **Features**
 

@@ -2,13 +2,14 @@ package keysat.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import keysat.dto.LoginDTO;
+import keysat.entities.Role;
 import keysat.entities.User;
 import keysat.repository.UserRepository;
 import keysat.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -16,9 +17,11 @@ import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+
 
 import java.util.Collections;
 
@@ -45,24 +48,43 @@ public class AuthenticationControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @BeforeEach
-    void SetUp(){
-    // mock data for user
-        User user = new User();
-        user.setUsername("test");
-        user.setPassword("password");
-        user.setRoles(Collections.singleton("USER"));
+    @MockBean
+    private UserDetailsService userDetailsService;
 
-        //mock data for userRepository
+    @BeforeEach
+    void SetUp() {
+        // Step 1: Create a user
+        User user = new User();
+        user.setUsername("testUser");
+        user.setPassword("password");
+
+        // Create a role and add it to the user
+        Role role = new Role();
+        role.setName("USER");
+        user.setRoles(Collections.singleton(role));
+
+        // Mock data for userRepository
         when(userRepository.findByUsername(user.getUsername())).thenReturn(user);
 
-        // mock data for userService
-        when(userService.loadUserByUsername(user.getUsername())).thenReturn(org.springframework.security.core.userdetails.User
+        // Mock data for userDetailsService
+        UserDetails userDetails = org.springframework.security.core.userdetails.User
                 .withUsername(user.getUsername())
                 .password(user.getPassword())
-                .roles(user.getRoles().toArray(new String[0]))
-                .build());
+                .roles(role.getName()) // Pass the role name directly
+                .build();
+        when(userDetailsService.loadUserByUsername(user.getUsername())).thenReturn(userDetails);
+
+        // Mock data for userService
+        when(userService.loadUserByUsername(user.getUsername())).thenReturn(
+                org.springframework.security.core.userdetails.User
+                        .withUsername(user.getUsername())
+                        .password(user.getPassword())
+                        .roles(role.getName()) // Pass the role name directly
+                        .build());
     }
+
+
+
 
     @Test
     public void testLoginWithValidCredentials() throws Exception {

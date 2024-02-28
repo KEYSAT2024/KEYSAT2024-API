@@ -1,74 +1,77 @@
-KEYSAT2024-API is a Spring Boot application with Spring Security for secure web interactions. It includes user authentication and protected endpoints.
-Configuration. This is an experimental build for researching and developing basic funcionality for the eventual KEYSAT2024 project.
-Security Configuration (Auth.java)
+The Keysat Alpha Application API is a educational platform that manages attendance records, courses, instructors, and students. It provides a REST API to interact with the system, handling user authentication, role-based access control, and CRUD operations for various entities.
 
-    Endpoints:
-        Public: "/", "/home", "/login"
-        Secured: "/secret" *USER ROLE*
-        
-    Authentication:
-        Type: Form-based
-        Page: "/login"
-        
-    User Details:
-        Stored In-memory
-        Default User: "user", Password: "password"
+**Features**
 
-Controllers
+- User authentication and authorization with Spring Security
+- Role-based access control for different user types (e.g., students, instructors)
+- Management of attendance records, courses, instructors, and students
+- Secure password handling with BCrypt encryption
+- RESTful API endpoints for CRUD operations
 
-    API Controller (API.java):
-        Handles requests for "/", "/login"
-        Returns view names for Thymeleaf templates
+**Prerequisites**
 
-Application Entry Point
+    Java Development Kit (JDK) 8 or higher
+    Maven for dependency management and project build
+    A suitable Integrated Development Environment (IDE) like IntelliJ IDEA or Eclipse
 
-    Class: KeysatAlphaApplication.java
-    Purpose: Bootstraps the application
+**Setup and Installation**
 
-Development
-Setup
+    Clone the repository to your local machine.
+    Navigate to the project's root directory.
+    Run mvn clean install to build the project and install the dependencies.
+    Set up the database using Spring Boot's capabilities and run the provided script located in /sql to insert user roles into the database.
+    Configure the application.properties file in the src/main/resources directory with your specific datasource, port, and any other configurations.
 
-    Add spring-boot-starter-security and spring-boot-starter-thymeleaf to your build configuration.
-    Place Thymeleaf templates in src/main/resources/templates.
+**Running the Application**
 
-Security
+    Execute the main method in the KeysatAlphaApplication class from your IDE
 
-    Use BCryptPasswordEncoder for production password encoding.
-    Include CSRF token in login forms.
-    Check session management settings if experiencing authentication issues.
+REST API Endpoints
 
-Debugging
+     Authentication
+    
+        POST /auth/login: Authenticate a user.
+        POST /auth/logout: Log out the current user.
+    
+    Attendance Records
+    
+        GET /attendance: Retrieve all attendance records.
+        POST /attendance: Add a new attendance record.
+        GET /attendance/{id}: Retrieve an attendance record by ID.
+    
+    Courses
+    
+        GET /courses: Retrieve all courses.
+        POST /courses: Add a new course.
+        GET /courses/{id}: Retrieve a course by ID.
+    
+    Instructors
+    
+        GET /instructors: Retrieve all instructors.
+        POST /instructors: Add a new instructor.
+        GET /instructors/{id}: Retrieve an instructor by ID.
+        PUT /instructors/{id}: Update an instructor by ID.
+        DELETE /instructors/{id}: Delete an instructor by ID.
+    
+    Students
+    
+        GET /students: Retrieve all students.
+        POST /students: Add a new student.
+        GET /students/{id}: Retrieve a student by ID.
+    
+    User Managment
+    
+        GET /users: Retrieve all users.
+        POST /users/create: Create a new user.
+        GET /users/{userId}: Retrieve a user by ID.
+        PUT /users/{userId}: Update a user by ID.
+        POST /users/change-password: Change a user's password.
 
-    Set logging.level.org.springframework.security=DEBUG for in-depth security logs.
+Testing
+
+    The src/test directory contains tests for the application.
 
 
-Endpoints for Attendance Service:
+Development Routes
 
-    Courses:
-        GET `/courses:` Lists all courses.
-        GET `/courses/{id}`: Retrieves a specific course by ID.
-        POST `/courses: `Creates a new course.
-        PUT `/courses/{id}`: Updates an existing course by ID.
-        DELETE `/courses/{id}`: Deletes a course by ID.
-        
-    Students:
-        GET `/students`: Lists all students.
-        GET `/students/{id}`: Retrieves a specific student by ID.
-        POST `/students`: Creates a new student.
-        PUT `/students/{id}`: Updates an existing student by ID.
-        DELETE `/students/{id}`: Deletes a student by ID.    
-
-    Instructors:
-        GET `/instructors`: Lists all instructors.
-        GET `/instructors/{id}`: Retrieves a specific instructor by ID.
-        GET `/instructors/{id}/courses`: Lists all courses for the specific instructor.
-        POST `/instructors`: Creates a new instructor.
-        PUT `/instructors/{id}`: Updates an existing instructor by ID.
-        DELETE `/instructors/{id}`: Deletes an instructor by ID.    
-
-    Attendance:
-        GET `/attendanceRecords:` Lists all attendance records.
-        GET `/attendanceRecords/{id}:` Retrieves a specific attendance record by ID.
-        POST `/attendanceRecords:` Creates a new attendance record.
-        PUT `/attendanceRecords/{id}:` Updates an existing attendance record by ID.
-        DELETE `/attendanceRecords/{id}:` Deletes an attendance record by ID.
+    The TestRoutes.java class provides endpoints for internal development and testing. These routes are not intended for production use.

@@ -2,8 +2,10 @@ package keysat.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
 @Entity(name = "instructor")
 @Table(name = "instructor")
@@ -13,12 +15,10 @@ import java.util.HashSet;
         foreignKey = @ForeignKey(name = "instructor_user_id_fkey")
 )
 public class Instructor extends User {
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(
-            name = "instructor_id",
-            referencedColumnName = "instructor_id",
-            nullable = false,
-            foreignKey = @ForeignKey(name = "course_instructor_id_fkey")
+    @OneToMany(
+            mappedBy = "instructor",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL
     )
     private final Collection<Course> courseCollection = new HashSet<>();
 }

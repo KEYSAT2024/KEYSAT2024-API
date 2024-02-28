@@ -14,6 +14,19 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Course {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "name")
     private String name;
+
+    @ManyToOne(
+            fetch = FetchType.EAGER
+    )
+    @JoinColumn(
+            name = "instructor_id",
+            referencedColumnName = "instructor_id",
+            foreignKey = @ForeignKey(name = "course_instructor_id_fkey")
+    )
+    private Instructor instructor;
 }

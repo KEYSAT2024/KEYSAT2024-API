@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS roles (
     authority VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL
 );
-INSERT INTO roles (authority, name) VALUES ('ROLE_USER', 'user');
-INSERT INTO roles (authority, name) VALUES ('ROLE_INSTRUCTOR', 'INSTRUCTOR');
-INSERT INTO roles (authority, name) VALUES ('ROLE_ADMIN', 'ADMIN');
+INSERT INTO role (authority, name) VALUES ('ROLE_USER', 'user');
+INSERT INTO role (authority, name) VALUES ('ROLE_INSTRUCTOR', 'INSTRUCTOR');
+INSERT INTO role (authority, name) VALUES ('ROLE_ADMIN', 'ADMIN');
+

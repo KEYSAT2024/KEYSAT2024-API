@@ -33,7 +33,7 @@ public class InstructorController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("{id}/courses")
+    @GetMapping("{id}/course")
     public Collection<Course> getCoursesByInstructorId(@PathVariable Long id) {
         return this.instructorService.getCoursesByInstructorId(id);
     }

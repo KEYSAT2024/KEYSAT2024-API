@@ -1,5 +1,6 @@
 package keysat.controller;
 
+import keysat.entities.Course;
 import keysat.entities.Instructor;
 import keysat.service.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -27,8 +29,13 @@ public class InstructorController {
     @GetMapping("{id}")
     public ResponseEntity<Instructor> getInstructorById(@PathVariable Long id) {
         return this.instructorService.getInstructorById(id)
-                .map(item -> new ResponseEntity<>(item, HttpStatus.OK))
+                .map(instructor -> new ResponseEntity<>(instructor, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("{id}/courses")
+    public Collection<Course> getCoursesByInstructorId(@PathVariable Long id) {
+        return this.instructorService.getCoursesByInstructorId(id);
     }
 
     @ResponseStatus(HttpStatus.CREATED)

@@ -1,8 +1,11 @@
 package keysat.repository;
 
 import keysat.entities.Course;
+import keysat.entities.Instructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CourseRepository extends JpaRepository<Course, Long> {
+import java.util.Collection;
 
+public interface CourseRepository extends JpaRepository<Course, Long> {
+    Collection<Course> findByInstructor(Instructor instructor);
 }

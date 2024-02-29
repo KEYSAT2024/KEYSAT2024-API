@@ -9,13 +9,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity(name = "attendanceRecord")
-@Table(name = "attendance_record")
+@Entity(name = "attendance")
+@Table(name = "attendance")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AttendanceRecord {
+public class Attendance {
     @Id
     private Long id;
     private Long studentId;

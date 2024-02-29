@@ -41,23 +41,23 @@ REST API Endpoints
     
     Courses
     
-        GET /courses: Retrieve all courses.
-        POST /courses: Add a new course.
-        GET /courses/{id}: Retrieve a course by ID.
+        GET /course: Retrieve all courses.
+        POST /course: Add a new course.
+        GET /course/{id}: Retrieve a course by ID.
     
     Instructors
     
-        GET /instructors: Retrieve all instructors.
-        POST /instructors: Add a new instructor.
-        GET /instructors/{id}: Retrieve an instructor by ID.
-        PUT /instructors/{id}: Update an instructor by ID.
-        DELETE /instructors/{id}: Delete an instructor by ID.
+        GET /instructor: Retrieve all instructors.
+        POST /instructor: Add a new instructor.
+        GET /instructor/{id}: Retrieve an instructor by ID.
+        PUT /instructor/{id}: Update an instructor by ID.
+        DELETE /instructor/{id}: Delete an instructor by ID.
     
     Students
     
-        GET /students: Retrieve all students.
-        POST /students: Add a new student.
-        GET /students/{id}: Retrieve a student by ID.
+        GET /student: Retrieve all students.
+        POST /student: Add a new student.
+        GET /student/{id}: Retrieve a student by ID.
     
     User Managment
     

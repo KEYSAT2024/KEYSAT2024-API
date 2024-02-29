@@ -1,0 +1,10 @@
+CREATE DATABASE IF NOT EXISTS auth;
+USE auth;
+CREATE TABLE IF NOT EXISTS roles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    authority VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL
+);
+INSERT INTO roles (authority, name) VALUES ('ROLE_USER', 'user');
+INSERT INTO roles (authority, name) VALUES ('ROLE_INSTRUCTOR', 'INSTRUCTOR');
+INSERT INTO roles (authority, name) VALUES ('ROLE_ADMIN', 'ADMIN');

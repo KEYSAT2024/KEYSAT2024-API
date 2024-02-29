@@ -61,11 +61,11 @@ REST API Endpoints
     
     User Managment
     
-        GET /users: Retrieve all users.
-        POST /users/create: Create a new user.
-        GET /users/{userId}: Retrieve a user by ID.
-        PUT /users/{userId}: Update a user by ID.
-        POST /users/change-password: Change a user's password.
+        GET /user: Retrieve all users.
+        POST /user/create: Create a new user.
+        GET /user/{userId}: Retrieve a user by ID.
+        PUT /user/{userId}: Update a user by ID.
+        POST /user/change-password: Change a user's password.
 
 Testing
 

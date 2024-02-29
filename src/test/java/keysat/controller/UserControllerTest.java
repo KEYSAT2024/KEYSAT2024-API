@@ -68,14 +68,14 @@ public class UserControllerTest {
         String role = "ADMIN";
 
         // Create the user
-        mockMvc.perform(MockMvcRequestBuilders.post("/users/create")
+        mockMvc.perform(MockMvcRequestBuilders.post("/user/create")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{ \"username\": \"" + username + "\", \"password\": \"" + password + "\", \"role\": \"" + role
                         + "\" }")
                 .param("role", "ADMIN")).andExpect(status().isOk());
 
-        // Perform GET request to /users
-        ResultActions resultActions = mockMvc.perform(get("/users")
+        // Perform GET request to /user
+        ResultActions resultActions = mockMvc.perform(get("/user")
                 .contentType(MediaType.APPLICATION_JSON));
 
         // Assert the response
@@ -94,14 +94,14 @@ public class UserControllerTest {
         String role = "ADMIN";
 
         // Create the user
-        mockMvc.perform(MockMvcRequestBuilders.post("/users/create")
+        mockMvc.perform(MockMvcRequestBuilders.post("/user/create")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{ \"username\": \"" + username + "\", \"password\": \"" + password + "\", \"role\": \"" + role
                         + "\" }")
                 .param("role", "ADMIN")).andExpect(status().isOk());
 
-        // Perform GET request to /users/{userId}
-        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}", 1)
+        // Perform GET request to /user/{userId}
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/user/{userId}", 1)
                 .contentType(MediaType.APPLICATION_JSON));
 
         // Assert the response
@@ -120,14 +120,14 @@ public class UserControllerTest {
         String role = "ADMIN";
 
         // Create the user
-        mockMvc.perform(MockMvcRequestBuilders.post("/users/create")
+        mockMvc.perform(MockMvcRequestBuilders.post("/user/create")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{ \"username\": \"" + username + "\", \"password\": \"" + password + "\", \"role\": \"" + role
                         + "\" }")
                 .param("role", "ADMIN")).andExpect(status().isOk());
 
-        // Perform GET request to /users
-        ResultActions resultActions = mockMvc.perform(get("/users")
+        // Perform GET request to /user
+        ResultActions resultActions = mockMvc.perform(get("/user")
                 .contentType(MediaType.APPLICATION_JSON));
 
         // Assert the response
@@ -146,7 +146,7 @@ public class UserControllerTest {
         String role = "ADMIN";
 
         // Create the user
-        mockMvc.perform(MockMvcRequestBuilders.post("/users/create")
+        mockMvc.perform(MockMvcRequestBuilders.post("/user/create")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{ \"username\": \"" + username + "\", \"password\": \"" + password + "\", \"role\": \"" + role
                         + "\" }")
@@ -157,13 +157,13 @@ public class UserControllerTest {
         updatedUser.setUsername("updatedUser");
 
         // Step 3: Update the user
-        mockMvc.perform(MockMvcRequestBuilders.put("/users/{userId}", 1)
+        mockMvc.perform(MockMvcRequestBuilders.put("/user/{userId}", 1)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{ \"username\": \"" + updatedUser.getUsername() + "\", \"role\": \"" + role + "\" }"))
                 .andExpect(status().isOk());
 
         // Step 4: Check if the user was updated
-        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}", 1)
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/user/{userId}", 1)
                 .contentType(MediaType.APPLICATION_JSON));
 
         // Assert the response
@@ -212,7 +212,7 @@ public class UserControllerTest {
         String role = "ADMIN";
 
         // Create the user and capture the response
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users/create?role=ADMIN") // As part of URL
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/user/create?role=ADMIN") // As part of URL
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{ \"username\": \"" + username + "\", \"password\": \"" + password + "\" }"))                                     
                 .andExpect(status().isOk())
@@ -223,12 +223,12 @@ public class UserControllerTest {
         Long userId = JsonPath.parse(responseString).read("$.user_id", Long.class);
 
         // Now delete the user using the extracted user ID
-        mockMvc.perform(MockMvcRequestBuilders.delete("/users/{userId}", userId)
+        mockMvc.perform(MockMvcRequestBuilders.delete("/user/{userId}", userId)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         // Check if the user has been deleted
-        mockMvc.perform(get("/users")
+        mockMvc.perform(get("/user")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())

@@ -21,7 +21,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
      private static final Logger log = LoggerFactory.getLogger(UserController.class);
@@ -36,7 +36,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/users")
+    @GetMapping("/user")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }

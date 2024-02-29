@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.stream.Collectors;
 
 @Entity(name = "user")
-@Table(name = "users")
+@Table(name = "\"user\"") // quotes should be here
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter

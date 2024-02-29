@@ -1,4 +1,4 @@
-CREATE TABLE `user_roles` (
+CREATE TABLE `user_role` (
   `role_id` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
   `authority` varchar(50) NOT NULL,

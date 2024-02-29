@@ -29,7 +29,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             List<SimpleGrantedAuthority> authorities = jdbcClient
                     .sql(
                             "SELECT u.username, r.authority FROM \"user\" u " +
-                            "JOIN user_roles ur ON u.user_id = ur.user_id " +
+                            "JOIN user_role ur ON u.user_id = ur.user_id " +
                             "JOIN role r ON ur.role_id = r.role_id WHERE u.username = :username;"
                     )
                     .param("username", username)

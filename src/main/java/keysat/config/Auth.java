@@ -36,10 +36,10 @@ public class Auth {
     return new BCryptPasswordEncoder(); 
 }
 
-@Bean
-public UserDetailsService userDetailsService() {
-    return new CustomUserDetailsService();
-}
+	@Bean
+	public UserDetailsService userDetailsService() {
+		return new CustomUserDetailsService();
+	}
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -80,7 +80,7 @@ public UserDetailsService userDetailsService() {
 				.usersByUsernameQuery("SELECT username, password, enabled FROM \"user\" WHERE username=?")
 				.authoritiesByUsernameQuery(
 						"SELECT u.username, r.authority FROM \"user\" u " +
-								"JOIN user_roles ur ON u.user_id = ur.user_id " +
+								"JOIN user_role ur ON u.user_id = ur.user_id " +
 								"JOIN role r ON ur.role_id = r.role_id WHERE u.username=?");
 	}
 }

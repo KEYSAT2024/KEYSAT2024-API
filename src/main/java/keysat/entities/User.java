@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.stream.Collectors;
 
 @Entity(name = "user")
-@Table(name = "users")
+@Table(name = "\"user\"") // quotes should be here
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
@@ -37,7 +37,7 @@ public class User implements UserDetails {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-        name = "user_roles",
+        name = "user_role",
         joinColumns = @JoinColumn(name = "user_id"),
         inverseJoinColumns = @JoinColumn(name = "role_id")
     )

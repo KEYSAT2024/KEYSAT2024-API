@@ -5,7 +5,6 @@ import keysat.service.CustomUserDetailsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +14,6 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 
@@ -38,10 +36,10 @@ public class Auth {
     return new BCryptPasswordEncoder(); 
 }
 
-@Bean
-public UserDetailsService userDetailsService() {
-    return new CustomUserDetailsService();
-}
+	@Bean
+	public UserDetailsService userDetailsService() {
+		return new CustomUserDetailsService();
+	}
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -61,10 +59,10 @@ public UserDetailsService userDetailsService() {
 						.requestMatchers("/", "/home", "/login", "/auth/login").permitAll()
 						.requestMatchers("/secret").hasRole("USER")
 						.requestMatchers("/instructorsecret").hasRole("INSTRUCTOR")
-						.requestMatchers("/users/create").permitAll()
-						.requestMatchers("/users/{userId}").permitAll()
-						.requestMatchers("/users/change-password").permitAll()
-						.requestMatchers("/users").permitAll())
+						.requestMatchers("/user/create").permitAll()
+						.requestMatchers("/user/{userId}").permitAll()
+						.requestMatchers("/user/change-password").permitAll()
+						.requestMatchers("/user").permitAll())
 			
 				.csrf().disable();
 
@@ -79,10 +77,10 @@ public UserDetailsService userDetailsService() {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication()
 				.dataSource(dataSource)
-				.usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username=?")
+				.usersByUsernameQuery("SELECT username, password, enabled FROM \"user\" WHERE username=?")
 				.authoritiesByUsernameQuery(
-						"SELECT u.username, r.authority FROM users u " +
-								"JOIN user_roles ur ON u.user_id = ur.user_id " +
+						"SELECT u.username, r.authority FROM \"user\" u " +
+								"JOIN user_role ur ON u.user_id = ur.user_id " +
 								"JOIN role r ON ur.role_id = r.role_id WHERE u.username=?");
 	}
 }

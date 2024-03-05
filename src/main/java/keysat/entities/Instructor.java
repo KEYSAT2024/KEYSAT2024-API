@@ -2,10 +2,8 @@ package keysat.entities;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 
 @Entity(name = "instructor")
 @Table(name = "instructor")

@@ -20,7 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) {
         Optional<User> userOptional = jdbcClient
-                .sql("SELECT username, password, enabled FROM \"user\" WHERE username = :username;")
+                .sql("SELECT username, password, enabled FROM user WHERE username = :username;")
                 .param("username", username)
                 .query(User.class)
                 .optional();
@@ -28,7 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         return userOptional.map(user -> {
             List<SimpleGrantedAuthority> authorities = jdbcClient
                     .sql(
-                            "SELECT u.username, r.authority FROM \"user\" u " +
+                            "SELECT u.username, r.authority FROM user u " +
                             "JOIN user_role ur ON u.user_id = ur.user_id " +
                             "JOIN role r ON ur.role_id = r.role_id WHERE u.username = :username;"
                     )

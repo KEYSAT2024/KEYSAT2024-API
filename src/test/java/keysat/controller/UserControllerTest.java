@@ -75,7 +75,7 @@ public class UserControllerTest {
                 .param("role", "ADMIN")).andExpect(status().isOk());
 
         // Perform GET request to /user
-        ResultActions resultActions = mockMvc.perform(get("/user")
+        ResultActions resultActions = mockMvc.perform(get("/user/user")
                 .contentType(MediaType.APPLICATION_JSON));
 
         // Assert the response
@@ -127,7 +127,7 @@ public class UserControllerTest {
                 .param("role", "ADMIN")).andExpect(status().isOk());
 
         // Perform GET request to /user
-        ResultActions resultActions = mockMvc.perform(get("/user")
+        ResultActions resultActions = mockMvc.perform(get("/user/user")
                 .contentType(MediaType.APPLICATION_JSON));
 
         // Assert the response
@@ -228,7 +228,7 @@ public class UserControllerTest {
                 .andExpect(status().isOk());
 
         // Check if the user has been deleted
-        mockMvc.perform(get("/user")
+        mockMvc.perform(get("/user/user")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
